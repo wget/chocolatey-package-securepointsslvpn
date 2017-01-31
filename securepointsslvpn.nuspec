@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Do not remove this test for UTF-8: if “Ω” doesn’t appear as greek
+     uppercase omega letter enclosed in quotation marks, you should use an
+     editor that supports UTF-8, not this one. -->
+<package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
+    <metadata>
+        <id>securepointsslvpn</id>
+        <title>Securepoint SSL VPN Client</title>
+        <version>2.0.18</version>
+        <authors>Securepoint Security Solutions</authors>
+        <owners>wget</owners>
+        <summary>SSL VPN Client for Windows (OpenVPN)</summary>
+        <description>OpenVPN GUI for Windows.</description>
+        <projectUrl>https://www.securepoint.de/en/products/nextgen-utm-firewalls/vpn-client.html</projectUrl>
+        <tags>securepoint openvpn community tunnel ssl admin</tags>
+        <copyright>2016 Securepoint GmbH</copyright>
+        <licenseUrl>https://github.com/Securepoint/openvpn-client/blob/master/LICENSE.txt</licenseUrl>
+        <requireLicenseAcceptance>true</requireLicenseAcceptance>
+        <!-- Source: https://github.com/Securepoint/openvpn-client/blob/master/client/data/images_new/app-icon.png -->
+        <iconUrl>https://cdn.rawgit.com/Securepoint/openvpn-client/master/client/data/images_new/app-icon.png</iconUrl>
+        <dependencies>
+            <!-- The id is the lowest version required tomake the package work.
+                 If we do not specify one, the chocolatey web validator will
+                 report a warning to be fixed in order to respect guidelines. -->
+            <dependency id="chocolatey" version="0.9.10" />
+            <dependency id="autoit.commandline" version="3.3.14.2" />
+        </dependencies>
+        <releaseNotes>https://github.com/Securepoint/openvpn-client/releases</releaseNotes>  
+        <!-- Specific to Chocolatey -->
+        <projectSourceUrl>https://github.com/Securepoint/openvpn-client</projectSourceUrl>
+        <docsUrl>https://sourceforge.net/p/securepoint/wiki/Home/</docsUrl>
+        <bugTrackerUrl>https://github.com/Securepoint/openvpn-client/issues</bugTrackerUrl>
+        <packageSourceUrl>https://github.com/wget/chocolatey_securepointsslvpn</packageSourceUrl>
+  </metadata>
+  <files>
+      <file src="tools\**" target="tools" />
+  </files>
+</package>
