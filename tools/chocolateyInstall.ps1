@@ -96,6 +96,7 @@ if (!$msiWelcomeText.StartsWith("Welcome to Securepoint SSL VPN")) {
 }
 
 Write-Host "Copying the MSI installer..."
+Write-Debug "DEBUG TEMP DIR PACKAGE VERSION 1: ""$(CreateTempDirPackageVersion)"""
 $msiTempFile = Join-Path `
     $([Environment]::ExpandEnvironmentVariables('%TEMP%')) `
     'SecurepointSSLVPN.msi'
@@ -124,6 +125,9 @@ for ($i = 0; $i -lt $cmdChilds; $i++) {
     Write-Debug "Killing PID: $($childPid[$i].ProcessId)"
     Stop-Process -Id $childPid[$i].ProcessId -Force
 }
+
+Write-Debug "DEBUG TEMP DIR PACKAGE VERSION 2: ""$(CreateTempDirPackageVersion)"""
+Write-Debug "DEBUG TEMP ENV DIR: ""$($env:TEMP)"""
 
 Write-Host "Installing silently the recovered MSI installer..."
 $packageArgs = @{
