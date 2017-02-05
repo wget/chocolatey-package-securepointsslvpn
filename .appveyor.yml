@@ -57,5 +57,7 @@ notifications:
 on_success:
 - ps: >-
     choco install securepointsslvpn -fdv -source "'.;https://chocolatey.org/api/v2/'" --yes
+    
+    Start-Sleep 3600
 
     choco uninstall securepointsslvpn -y -dv
