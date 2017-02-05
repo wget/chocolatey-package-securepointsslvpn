@@ -32,12 +32,14 @@ clone_script:
     Start-Process -FilePath "git" -ArgumentList "config --global url.https://github.com/wget/chocolatey.insteadOf git@github.com:wget/chocolatey" -NoNewWindow -Wait -Passthru
 
     Start-Process -FilePath "git" -ArgumentList "clone --recursive git@github.com:wget/chocolatey-package-securepointsslvpn.git" -NoNewWindow -Wait -Passthru
+
+    cd chocolatey-package-securepointsslvpn
+    
+    Start-Process -FilePath "git" -ArgumentList "checkout fix-appveyor" -NoNewWindow -Wait -Passthru    
 nuget:
   disable_publish_on_pr: true
 build_script:
-- ps: >-
-    cd chocolatey-package-securepointsslvpn
-
+- ps: >-   
     choco pack .\securepointsslvpn.nuspec
 test: off
 artifacts:
