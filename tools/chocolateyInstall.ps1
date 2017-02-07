@@ -96,12 +96,14 @@ if (!$msiWelcomeText.StartsWith("Welcome to Securepoint SSL VPN")) {
 }
 
 Write-Host "Copying the MSI installer..."
-Write-Debug "DEBUG TEMP DIR PACKAGE VERSION 1: ""$(CreateTempDirPackageVersion)"""
-$msiTempFile = Join-Path `
+Write-Host "DEBUG TEMP DIR PACKAGE VERSION 1: ""$(CreateTempDirPackageVersion)"""
+$msiTempFile = `
     $([Environment]::ExpandEnvironmentVariables('%TEMP%')) `
+    + '\' +
     'SecurepointSSLVPN.msi'
-$msiPermanentFile = Join-Path `
+$msiPermanentFile = `
     $(CreateTempDirPackageVersion) `
+    + '\' +
     "$($packageName)Install.msi"
 # Copy it to C:\Users\<user>\AppData\Local\Temp\chocolatey\securepointsslvpn\<version>
 Copy-Item $msiTempFile $msiPermanentFile
