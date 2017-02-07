@@ -101,6 +101,7 @@ $msiTempFile = `
     $([Environment]::ExpandEnvironmentVariables('%TEMP%')) `
     + '\' +
     'SecurepointSSLVPN.msi'
+     #SecurepointSSLVPN.msi
 Write-Host "DEBUG AFTER MSI TEMP FILE"
 $msiPermanentFile = `
     $(CreateTempDirPackageVersion) `
@@ -108,7 +109,9 @@ $msiPermanentFile = `
     "$($packageName)Install.msi"
 Write-Host "DEBUG BEFORE COPY"
 # Copy it to C:\Users\<user>\AppData\Local\Temp\chocolatey\securepointsslvpn\<version>
-Copy-Item $msiTempFile $msiPermanentFile
+# Prevent to continue if the copy fails. By default every command relies on
+# the $ErrorActionPreference. By default the latter is set on Continue (tested).
+Copy-Item -Path "$msiTempFile" -Destination "$msiPermanentFile" -ErrorAction Stop
 
 Write-Host "Killing the non silent MSI installer..."
 [array]$childPid = GetChildPid -id $installerPid
@@ -121,7 +124,7 @@ Write-Debug "cmd PID: $($childPid[0].ProcessId)"
 if ($childPid.Count -eq 0) {
     throw "Unable to find the pid of the msiexec executable run by the cmd process."
 }
-# cmd has several childs PID. The msiexec is usuaally the second one. Just
+# cmd has several childs PID. The PID of msiexec is usually the second one. Just
 # to be sure, we are gonna kill all cmd childs.
 $cmdChilds = $($childPid.Count)
 Write-Debug "cmd childs number: $cmdChilds"
