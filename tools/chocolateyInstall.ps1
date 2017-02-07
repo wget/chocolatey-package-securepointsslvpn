@@ -101,10 +101,12 @@ $msiTempFile = `
     $([Environment]::ExpandEnvironmentVariables('%TEMP%')) `
     + '\' +
     'SecurepointSSLVPN.msi'
+Write-Host "DEBUG AFTER MSI TEMP FILE"
 $msiPermanentFile = `
     $(CreateTempDirPackageVersion) `
     + '\' +
     "$($packageName)Install.msi"
+Write-Host "DEBUG BEFORE COPY"
 # Copy it to C:\Users\<user>\AppData\Local\Temp\chocolatey\securepointsslvpn\<version>
 Copy-Item $msiTempFile $msiPermanentFile
 
