@@ -47,7 +47,7 @@ try {
     Write-Host "No previous Securepoint VPN service detected."
 }
 
-Write-Host "Removing the previous installation to avoid issue..."
+Write-Host "Removing the previous installation to avoid issues..."
 . "$toolsDir\chocolateyUninstall.ps1"
 
 # To select the language in the installer, we need to use AutoIT scripts.
@@ -96,14 +96,20 @@ if (!$msiWelcomeText.StartsWith("Welcome to Securepoint SSL VPN")) {
 }
 
 Write-Host "Copying the MSI installer..."
+# Do not use the environment variable, as the latter might get redefined (which
+# happens in AppVeyor for example) and some installers might use the default
+# TEMP location instead.
+#$([Environment]::ExpandEnvironmentVariables('%TEMP%')) 
 $msiTempFile = Join-Path `
-    $([Environment]::ExpandEnvironmentVariables('%TEMP%')) `
+    $([System.IO.Path]::GetTempPath()) `
     'SecurepointSSLVPN.msi'
 $msiPermanentFile = Join-Path `
     $(CreateTempDirPackageVersion) `
     "$($packageName)Install.msi"
 # Copy it to C:\Users\<user>\AppData\Local\Temp\chocolatey\securepointsslvpn\<version>
-Copy-Item $msiTempFile $msiPermanentFile
+# Prevent to continue if the copy fails. By default every command relies on
+# the $ErrorActionPreference. By default the latter is set on Continue (tested).
+Copy-Item -Path "$msiTempFile" -Destination "$msiPermanentFile" -ErrorAction Stop
 
 Write-Host "Killing the non silent MSI installer..."
 [array]$childPid = GetChildPid -id $installerPid
@@ -116,8 +122,8 @@ Write-Debug "cmd PID: $($childPid[0].ProcessId)"
 if ($childPid.Count -eq 0) {
     throw "Unable to find the pid of the msiexec executable run by the cmd process."
 }
-# cmd has several childs PID. The msiexec is usuaally the second one. Just
-# to be sure, we are gonna kill all cmd childs.
+# cmd has several childs PID. The PID of msiexec is usually the second one.
+# Just to be sure, we are gonna kill all cmd childs.
 $cmdChilds = $($childPid.Count)
 Write-Debug "cmd childs number: $cmdChilds"
 for ($i = 0; $i -lt $cmdChilds; $i++) {
