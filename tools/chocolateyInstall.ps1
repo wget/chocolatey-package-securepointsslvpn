@@ -1,7 +1,7 @@
 $packageName= 'securepointsslvpn'
 $toolsDir   = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"
-$url        = 'https://github.com/Securepoint/openvpn-client/releases/download/2.0.18/openvpn-client-installer-2.0.18.exe'
-$checksum   = '11c89ae60ebff7aeb847f1b18418ceae38c6651504cd8334a51c6a28c71712e41393a33962c68879802386eeedbceff8fe400eba8a5355a200d8e201bd479ceb'
+$url        = 'https://github.com/Securepoint/openvpn-client/releases/download/2.0.21/openvpn-client-installer-2.0.21.exe'
+$checksum   = '843f11b744deeeeb928bb8c4109f74c88a81c152cc69279e3585b2dbc19fc9798b9ba30fdc4d90b4ddef08a506b884b4dbd3ab2c1b8f3560c22dc79576717b19'
 
 # Load custom functions
 . "$toolsDir\utils\utils.ps1"
@@ -88,12 +88,6 @@ Send-AU3Key -Key "{ENTER}" | Out-Null
 
 Write-Host "Waiting for the MSI installer to launch..."
 Wait-AU3Win -Title "Securepoint SSL VPN Setup" | Out-Null
-$winHandle = Get-AU3WinHandle -Title "Securepoint SSL VPN Setup"
-$controlHandle = Get-AU3ControlHandle -WinHandle $winHandle -Control Static2
-$msiWelcomeText = Get-AU3ControlText -WinHandle $winHandle -ControlHandle $controlHandle
-if (!$msiWelcomeText.StartsWith("Welcome to Securepoint SSL VPN")) {
-    throw "This is not the MSI installer we were expecting. Aborted."
-}
 
 Write-Host "Copying the MSI installer..."
 # Do not use the environment variable, as the latter might get redefined (which
