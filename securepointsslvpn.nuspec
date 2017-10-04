@@ -10,7 +10,31 @@
         <authors>Securepoint Security Solutions</authors>
         <owners>wget</owners>
         <summary>SSL VPN Client for Windows (OpenVPN)</summary>
-        <description>OpenVPN GUI for Windows.</description>
+        <description>Securepoint VPN Client is a solution built on OpenVPN. It basically adds an friendly graphical user interface to OpenVPN on Windows.
+
+        From the Securepoint website:
+
+        Securepoint VPN is compatible with all current VPN servers and VPN clients from third-parties such as NCP, Greenbow etc. and can be run with these fee-based VPN clients. Securepoint VPN supports the protocols: L2TP/PPTP, IPSec via X.509 certificate/IKE and preshared keys, SSL VPN (OpenVPN) and is Windows 7-ready with IKEv1 and IKEv2 support.
+
+        Features:
+
+        * Configuration assistant, enables the simple creation of VPN connections
+        * Automatic configuration in conjunction with Securepoint VPN-/UTM-Gateways; out-of-the-box VPN-Client can be downloaded from the VPN-/UTM-Gateway user website.
+        * Administrator rights are not required on the computer
+        * Clear user interface for managing large number of VPN connections
+        * Multiple simultaneous VPN connections are possible
+        * Start connection: An automatic dial-up is possible in combination with saving the user data
+        * Automatic execution of programs if VPN tunnels are established
+        * Log window to analyse traffic data / depending on the connection
+        * Integration into system tray with status display
+        * Importing configurations incl. Certificate Authority (CA), certificate, key and script file
+        * Simple import of third-party openVPN configurations
+        * Encrypted export of configurations
+        * Saving user data (user name, password, PKCS12 password, HTTP proxy user, HTTP proxy password) AES encrypted
+        * HTTP proxy with authentication (NTLM etc.)
+        * PKCS12 handling and Windows path in the GUI
+        * 32bit and 64bit TAP adapter installation and deinstallation from client
+        </description>
         <projectUrl>https://www.securepoint.de/en/products/nextgen-utm-firewalls/vpn-client.html</projectUrl>
         <tags>securepoint openvpn community tunnel ssl admin</tags>
         <copyright>2017 Securepoint GmbH</copyright>
