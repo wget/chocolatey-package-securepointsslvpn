@@ -55,8 +55,8 @@
         <docsUrl>https://sourceforge.net/p/securepoint/wiki/Home/</docsUrl>
         <bugTrackerUrl>https://github.com/Securepoint/openvpn-client/issues</bugTrackerUrl>
         <packageSourceUrl>https://github.com/wget/chocolatey-package-securepointsslvpn</packageSourceUrl>
-  </metadata>
-  <files>
-      <file src="tools\**" target="tools" />
-  </files>
+    </metadata>
+    <files>
+        <file src="tools\**" target="tools" exclude="**\utils\.git;**\utils\README.*" />
+    </files>
 </package>
