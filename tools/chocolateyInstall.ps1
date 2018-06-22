@@ -1,7 +1,7 @@
 $packageName= 'securepointsslvpn'
 $toolsDir   = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"
-$url        = 'https://github.com/Securepoint/openvpn-client/releases/download/2.0.21/openvpn-client-installer-2.0.21.exe'
-$checksum   = '843f11b744deeeeb928bb8c4109f74c88a81c152cc69279e3585b2dbc19fc9798b9ba30fdc4d90b4ddef08a506b884b4dbd3ab2c1b8f3560c22dc79576717b19'
+$url        = 'https://github.com/Securepoint/openvpn-client/releases/download/2.0.22/openvpn-client-installer-2.0.22.exe'
+$checksum   = 'f030d6d6708f98fae20d07ff87263c76a79650b84f17b55bb1a1e1d69ef1d630cbc3bc5c554a4bb8341777db397f42749f2d4c211469c73fa942beac632df8b3'
 
 # Load custom functions
 . "$toolsDir\utils\utils.ps1"

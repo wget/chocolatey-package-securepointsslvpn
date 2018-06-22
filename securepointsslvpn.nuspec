@@ -6,7 +6,7 @@
     <metadata>
         <id>securepointsslvpn</id>
         <title>Securepoint SSL VPN Client</title>
-        <version>2.0.21</version>
+        <version>2.0.22</version>
         <authors>Securepoint Security Solutions</authors>
         <owners>wget</owners>
         <summary>SSL VPN Client for Windows (OpenVPN)</summary>
@@ -37,7 +37,7 @@
         </description>
         <projectUrl>https://www.securepoint.de/en/products/nextgen-utm-firewalls/vpn-client.html</projectUrl>
         <tags>securepoint openvpn community tunnel ssl admin</tags>
-        <copyright>2017 Securepoint GmbH</copyright>
+        <copyright>2018 Securepoint GmbH</copyright>
         <licenseUrl>https://github.com/Securepoint/openvpn-client/blob/master/LICENSE.txt</licenseUrl>
         <requireLicenseAcceptance>true</requireLicenseAcceptance>
         <!-- Source: https://github.com/Securepoint/openvpn-client/blob/master/client/data/images_new/app-icon.png -->
