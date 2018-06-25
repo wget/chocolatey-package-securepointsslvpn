@@ -1,7 +1,7 @@
-$packageName= 'securepointsslvpn'
-$toolsDir   = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"
-$url        = 'https://github.com/Securepoint/openvpn-client/releases/download/2.0.21/openvpn-client-installer-2.0.21.exe'
-$checksum   = '843f11b744deeeeb928bb8c4109f74c88a81c152cc69279e3585b2dbc19fc9798b9ba30fdc4d90b4ddef08a506b884b4dbd3ab2c1b8f3560c22dc79576717b19'
+$packageName = 'securepointsslvpn'
+$toolsDir = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"
+$package = '$toolsDir\openvpn-client-installer-2.0.21.exe'
+$checksum = '843f11b744deeeeb928bb8c4109f74c88a81c152cc69279e3585b2dbc19fc9798b9ba30fdc4d90b4ddef08a506b884b4dbd3ab2c1b8f3560c22dc79576717b19'
 
 # Load custom functions
 . "$toolsDir\utils\utils.ps1"
@@ -64,17 +64,14 @@ if (!(Get-Command 'Invoke-AU3Run' -ErrorAction SilentlyContinue)) {
     throw "The AutoItX PowerShell module was not imported properly."
 }
 
-Write-Host "Downloading package installer..."
-$packageFileName = Get-ChocolateyWebFile `
-    -PackageName $packageName `
-    -FileFullPath $(Join-Path $(CreateTempDirPackageVersion) "$($packageName)Install.exe")`
-    -Url $url `
-    -Checksum $checksum `
+Get-ChecksumValid `
+    -File "$package" `
+    -Checksum "$checksum" `
     -ChecksumType 'sha512'
 
 Write-Host "Trying to recover the MSI file..."
 # Invoke-AU3Run returns an Int32 corresponding to the PID of the process
-[Int32]$installerPid = Invoke-AU3Run -Program "$packageFileName"
+[Int32]$installerPid = Invoke-AU3Run -Program "$package"
 Wait-AU3Win -Title "SSLVPN Installer" | Out-Null
 $winHandle = Get-AU3WinHandle -Title "SSLVPN Installer"
 # Get the focus on the window

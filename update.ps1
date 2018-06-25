@@ -2,29 +2,16 @@ import-module au
 
 $releases = 'https://github.com/Securepoint/openvpn-client/releases'
 
+function global:au_BeforeUpdate { Get-RemoteFiles -Purge -NoSuffix -Algorithm 'SHA512'}
+
 function global:au_SearchReplace {
     @{
         ".\tools\chocolateyInstall.ps1" = @{
-            "(^[$]url\s*=\s*)('.*')" = "`$1'$($Latest.url32)'"
-			"(^[$]checksum\s*=\s*)('.*')" = "`$1'$($Latest.checksum)'"
+            "(^[$]package\s*=\s*)('.*')" = "`$1'$($Latest.url32)'"
+            "(?i)(^\s*package\s*=\s*`"[$]toolsDir\\).*" = "`${1}$($Latest.filename32)`""
+			"(^[$]checksum\s*=\s*)('.*')" = "`$1'$($Latest.checksum32)'"
         }
     }
-}
-
-function au_BeforeUpdate {
-    # We can't rely on Get-RemoteChecksum as we want to have the files locally
-    # as well and this function will download a local copy of the file, just to
-    # compute its hashes, then drop it. We can't rely completely on
-    # Get-RemoteFiles either as that function is only taking Latest URLs (x64
-    # and x32) into account. The signatures are not supported.
-    # src.: https://github.com/majkinetor/au/tree/master/AU/Public
-    $client = New-Object System.Net.WebClient
-    $toolsPath = Resolve-Path tools
-
-    $filePath = "$toolsPath/securepointsslvpnInstall.exe"
-    Write-Host "Downloading installer to '$filePath'..."
-    $client.DownloadFile($url, $filePath)
-    $Latest.checksum = Get-FileHash $filePath -Algorithm sha512 | % Hash
 }
 
 function global:au_GetLatest {
@@ -43,8 +30,9 @@ function global:au_GetLatest {
     $version = [regex]::match($url32,'/[A-Za-z-]+-([0-9]+.[0-9]+.[0-9]+).*exe').Groups[1].Value
 
     return @{
-        version = $version;
         url32 = $url32;
+        filename32 = $filename32;
+        version = $version;
     }
 }
 
