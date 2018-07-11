@@ -1,4 +1,4 @@
-import-module au
+﻿import-module au
 
 $releases = 'https://github.com/Securepoint/openvpn-client/releases'
 
@@ -8,7 +8,7 @@ function global:au_SearchReplace {
     @{
         ".\tools\chocolateyInstall.ps1" = @{
             "(^[$]package\s*=\s*)('.*')" = "`$1'$($Latest.url32)'"
-            "(?i)(^\s*package\s*=\s*`"[$]toolsDir\\).*" = "`${1}$($Latest.filename32)`""
+            "(?i)(^\s*package\s*=\s*`"[$]toolsDir\\).*`${1}$($Latest.filename32)`""
 			"(^[$]checksum\s*=\s*)('.*')" = "`$1'$($Latest.checksum32)'"
         }
     }

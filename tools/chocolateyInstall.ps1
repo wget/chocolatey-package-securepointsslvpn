@@ -1,4 +1,4 @@
-$packageName = 'securepointsslvpn'
+﻿$packageName = 'securepointsslvpn'
 $toolsDir = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"
 $package = '$toolsDir\openvpn-client-installer-2.0.21.exe'
 $checksum = '843f11b744deeeeb928bb8c4109f74c88a81c152cc69279e3585b2dbc19fc9798b9ba30fdc4d90b4ddef08a506b884b4dbd3ab2c1b8f3560c22dc79576717b19'
