@@ -1,63 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Do not remove this test for UTF-8: if “Ω” doesn’t appear as greek
-     uppercase omega letter enclosed in quotation marks, you should use an
-     editor that supports UTF-8, not this one. -->
+   uppercase omega letter enclosed in quotation marks, you should use an
+   editor that supports UTF-8, not this one. -->
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
-    <metadata>
-        <id>securepointsslvpn</id>
-        <title>Securepoint SSL VPN Client</title>
-        <version>2.0.21</version>
-        <authors>Securepoint Security Solutions</authors>
-        <owners>wget</owners>
-        <summary>SSL VPN Client for Windows (OpenVPN)</summary>
-        <description>Securepoint VPN Client is a solution built on OpenVPN. It basically adds an friendly graphical user interface to OpenVPN on Windows.
+  <metadata>
+    <id>securepointsslvpn</id>
+    <title>Securepoint SSL VPN Client</title>
+    <version>2.0.21</version>
+    <authors>Securepoint Security Solutions</authors>
+    <owners>wget</owners>
+    <summary>SSL VPN Client for Windows (OpenVPN)</summary>
+    <description>Securepoint VPN Client is a solution built on OpenVPN. It basically adds an friendly graphical user interface to OpenVPN on Windows.
 
-        From the Securepoint website:
+    From the Securepoint website:
 
-        Securepoint VPN is compatible with all current VPN servers and VPN clients from third-parties such as NCP, Greenbow etc. and can be run with these fee-based VPN clients. Securepoint VPN supports the protocols: L2TP/PPTP, IPSec via X.509 certificate/IKE and preshared keys, SSL VPN (OpenVPN) and is Windows 7-ready with IKEv1 and IKEv2 support.
+    Securepoint VPN is compatible with all current VPN servers and VPN clients from third-parties such as NCP, Greenbow etc. and can be run with these fee-based VPN clients. Securepoint VPN supports the protocols: L2TP/PPTP, IPSec via X.509 certificate/IKE and preshared keys, SSL VPN (OpenVPN) and is Windows 7-ready with IKEv1 and IKEv2 support.
 
-        Features:
+    Features:
 
-        * Configuration assistant, enables the simple creation of VPN connections
-        * Automatic configuration in conjunction with Securepoint VPN-/UTM-Gateways; out-of-the-box VPN-Client can be downloaded from the VPN-/UTM-Gateway user website.
-        * Administrator rights are not required on the computer
-        * Clear user interface for managing large number of VPN connections
-        * Multiple simultaneous VPN connections are possible
-        * Start connection: An automatic dial-up is possible in combination with saving the user data
-        * Automatic execution of programs if VPN tunnels are established
-        * Log window to analyse traffic data / depending on the connection
-        * Integration into system tray with status display
-        * Importing configurations incl. Certificate Authority (CA), certificate, key and script file
-        * Simple import of third-party openVPN configurations
-        * Encrypted export of configurations
-        * Saving user data (user name, password, PKCS12 password, HTTP proxy user, HTTP proxy password) AES encrypted
-        * HTTP proxy with authentication (NTLM etc.)
-        * PKCS12 handling and Windows path in the GUI
-        * 32bit and 64bit TAP adapter installation and deinstallation from client
-        </description>
-        <projectUrl>https://www.securepoint.de/en/products/nextgen-utm-firewalls/vpn-client.html</projectUrl>
-        <tags>securepoint openvpn community tunnel ssl admin</tags>
-        <copyright>2017 Securepoint GmbH</copyright>
-        <licenseUrl>https://github.com/Securepoint/openvpn-client/blob/master/LICENSE.txt</licenseUrl>
-        <requireLicenseAcceptance>true</requireLicenseAcceptance>
-        <!-- Source: https://github.com/Securepoint/openvpn-client/blob/master/client/data/images_new/app-icon.png -->
-        <iconUrl>https://cdn.rawgit.com/Securepoint/openvpn-client/master/client/data/images_new/app-icon.png</iconUrl>
-        <dependencies>
-            <!-- The id is the lowest version required to make the package work.
-                 If we do not specify one, the chocolatey web validator will
-                 report a warning to be fixed in order to respect guidelines. -->
-            <dependency id="chocolatey" version="0.9.10" />
-            <dependency id="autoit.commandline" version="3.3.14.2" />
-        </dependencies>
-        <releaseNotes>https://github.com/Securepoint/openvpn-client/releases</releaseNotes>  
-        <!-- Specific to Chocolatey -->
-        <projectSourceUrl>https://github.com/Securepoint/openvpn-client</projectSourceUrl>
-        <docsUrl>https://sourceforge.net/p/securepoint/wiki/Home/</docsUrl>
-        <bugTrackerUrl>https://github.com/Securepoint/openvpn-client/issues</bugTrackerUrl>
-        <packageSourceUrl>https://github.com/wget/chocolatey-package-securepointsslvpn</packageSourceUrl>
-    </metadata>
-    <files>
-        <file src="tools\**" target="tools" exclude="**\utils\.git;**\utils\README.*" />
-        <file src="legal\**" target="legal" />
-    </files>
+    * Configuration assistant, enables the simple creation of VPN connections
+    * Automatic configuration in conjunction with Securepoint VPN-/UTM-Gateways; out-of-the-box VPN-Client can be downloaded from the VPN-/UTM-Gateway user website.
+    * Administrator rights are not required on the computer
+    * Clear user interface for managing large number of VPN connections
+    * Multiple simultaneous VPN connections are possible
+    * Start connection: An automatic dial-up is possible in combination with saving the user data
+    * Automatic execution of programs if VPN tunnels are established
+    * Log window to analyse traffic data / depending on the connection
+    * Integration into system tray with status display
+    * Importing configurations incl. Certificate Authority (CA), certificate, key and script file
+    * Simple import of third-party openVPN configurations
+    * Encrypted export of configurations
+    * Saving user data (user name, password, PKCS12 password, HTTP proxy user, HTTP proxy password) AES encrypted
+    * HTTP proxy with authentication (NTLM etc.)
+    * PKCS12 handling and Windows path in the GUI
+    * 32bit and 64bit TAP adapter installation and deinstallation from client
+    </description>
+    <projectUrl>https://www.securepoint.de/en/products/nextgen-utm-firewalls/vpn-client.html</projectUrl>
+    <tags>securepoint openvpn community tunnel ssl admin</tags>
+    <copyright>2017 Securepoint GmbH</copyright>
+    <licenseUrl>https://github.com/Securepoint/openvpn-client/blob/master/LICENSE.txt</licenseUrl>
+    <requireLicenseAcceptance>true</requireLicenseAcceptance>
+    <!-- Source: https://github.com/Securepoint/openvpn-client/blob/master/client/data/images_new/app-icon.png -->
+    <iconUrl>https://cdn.rawgit.com/Securepoint/openvpn-client/master/client/data/images_new/app-icon.png</iconUrl>
+    <dependencies>
+      <!-- The id is the lowest version required to make the package work.
+         If we do not specify one, the chocolatey web validator will
+         report a warning to be fixed in order to respect guidelines. -->
+      <dependency id="chocolatey" version="0.9.10" />
+      <dependency id="autoit.commandline" version="3.3.14.2" />
+    </dependencies>
+    <releaseNotes>https://github.com/Securepoint/openvpn-client/releases</releaseNotes>
+    <!-- Specific to Chocolatey -->
+    <projectSourceUrl>https://github.com/Securepoint/openvpn-client</projectSourceUrl>
+    <docsUrl>https://sourceforge.net/p/securepoint/wiki/Home/</docsUrl>
+    <bugTrackerUrl>https://github.com/Securepoint/openvpn-client/issues</bugTrackerUrl>
+    <packageSourceUrl>https://github.com/wget/chocolatey-package-securepointsslvpn</packageSourceUrl>
+  </metadata>
+  <files>
+    <file src="tools\**" target="tools" exclude="**\utils\.git;**\utils\README.*" />
+    <file src="legal\**" target="legal" />
+  </files>
 </package>

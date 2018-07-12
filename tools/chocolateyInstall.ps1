@@ -42,9 +42,9 @@ $checksum = '843f11b744deeeeb928bb8c4109f74c88a81c152cc69279e3585b2dbc19fc9798b9
 Write-Host "Getting the state of the current Securepoint VPN service (if any)..."
 # Needed to reset the state of the service if upgrading from a previous version
 try {
-    $previousService = GetServiceProperties "Securepoint VPN"
+  $previousService = GetServiceProperties "Securepoint VPN"
 } catch {
-    Write-Host "No previous Securepoint VPN service detected."
+  Write-Host "No previous Securepoint VPN service detected."
 }
 
 Write-Host "Removing the previous installation to avoid issues..."
@@ -61,13 +61,13 @@ Write-Host "Removing the previous installation to avoid issues..."
 # The imported modules are only valid for the current script session.
 Import-Module "$toolsDir\..\..\autoit.commandline\tools\install\AutoItX\AutoItX.psd1"
 if (!(Get-Command 'Invoke-AU3Run' -ErrorAction SilentlyContinue)) {
-    throw "The AutoItX PowerShell module was not imported properly."
+  throw "The AutoItX PowerShell module was not imported properly."
 }
 
 Get-ChecksumValid `
-    -File "$package" `
-    -Checksum "$checksum" `
-    -ChecksumType 'sha512'
+  -File "$package" `
+  -Checksum "$checksum" `
+  -ChecksumType 'sha512'
 
 Write-Host "Trying to recover the MSI file..."
 # Invoke-AU3Run returns an Int32 corresponding to the PID of the process
@@ -92,11 +92,11 @@ Write-Host "Copying the MSI installer..."
 # TEMP location instead.
 #$([Environment]::ExpandEnvironmentVariables('%TEMP%')) 
 $msiTempFile = Join-Path `
-    $([System.IO.Path]::GetTempPath()) `
-    'SecurepointSSLVPN.msi'
+  $([System.IO.Path]::GetTempPath()) `
+  'SecurepointSSLVPN.msi'
 $msiPermanentFile = Join-Path `
-    $(CreateTempDirPackageVersion) `
-    "$($packageName)Install.msi"
+  $(CreateTempDirPackageVersion) `
+  "$($packageName)Install.msi"
 # Copy it to C:\Users\<user>\AppData\Local\Temp\chocolatey\securepointsslvpn\<version>
 # Prevent to continue if the copy fails. By default every command relies on
 # the $ErrorActionPreference. By default the latter is set on Continue (tested).
@@ -106,41 +106,41 @@ Write-Host "Killing the non silent MSI installer..."
 [array]$childPid = GetChildPid -id $installerPid
 Write-Debug "installer PID: $installerPid"
 if ($childPid.Count -eq 0) {
-    throw "Unable to find the pid of the cmd executable run by the installer."
+  throw "Unable to find the pid of the cmd executable run by the installer."
 }
 Write-Debug "cmd PID: $($childPid[0].ProcessId)"
 [array]$childPid = GetChildPid -id $childPid[0].ProcessId
 if ($childPid.Count -eq 0) {
-    throw "Unable to find the pid of the msiexec executable run by the cmd process."
+  throw "Unable to find the pid of the msiexec executable run by the cmd process."
 }
 # cmd has several childs PID. The PID of msiexec is usually the second one.
 # Just to be sure, we are gonna kill all cmd childs.
 $cmdChilds = $($childPid.Count)
 Write-Debug "cmd childs number: $cmdChilds"
 for ($i = 0; $i -lt $cmdChilds; $i++) {
-    Write-Debug "Killing PID: $($childPid[$i].ProcessId)"
-    Stop-Process -Id $childPid[$i].ProcessId -Force
+  Write-Debug "Killing PID: $($childPid[$i].ProcessId)"
+  Stop-Process -Id $childPid[$i].ProcessId -Force
 }
 
 Write-Host "Installing silently the recovered MSI installer..."
 $packageArgs = @{
-    packageName   = $packageName
-    fileType      = 'msi'
-    file          = $msiPermanentFile
+  packageName   = $packageName
+  fileType    = 'msi'
+  file      = $msiPermanentFile
 
-    #MSI
-    silentArgs    = "TRANSFORMS=`":en-us.mst`" /qn /norestart /l*v `"$($env:TEMP)\$($packageName).$($env:chocolateyPackageVersion).MsiInstall.log`"" # ALLUSERS=1 DISABLEDESKTOPSHORTCUT=1 ADDDESKTOPICON=0 ADDSTARTMENU=0
-    validExitCodes= @(0, 3010, 1641)
-    softwareName  = $packageName
+  #MSI
+  silentArgs  = "TRANSFORMS=`":en-us.mst`" /qn /norestart /l*v `"$($env:TEMP)\$($packageName).$($env:chocolateyPackageVersion).MsiInstall.log`"" # ALLUSERS=1 DISABLEDESKTOPSHORTCUT=1 ADDDESKTOPICON=0 ADDSTARTMENU=0
+  validExitCodes= @(0, 3010, 1641)
+  softwareName  = $packageName
 }
 Install-ChocolateyInstallPackage @packageArgs
 
 if ($previousService) {
-    Write-Host "Resetting previous Securepoint VPN service to " `
-        "'$($previousService.status)' and " `
-        "'$($previousService.startupType)'..."
-    SetServiceProperties `
-        -name "Securepoint VPN" `
-        -status "$($previousService.status)" `
-        -startupType "$($previousService.startupType)"
+  Write-Host "Resetting previous Securepoint VPN service to " `
+    "'$($previousService.status)' and " `
+    "'$($previousService.startupType)'..."
+  SetServiceProperties `
+    -name "Securepoint VPN" `
+    -status "$($previousService.status)" `
+    -startupType "$($previousService.startupType)"
 }

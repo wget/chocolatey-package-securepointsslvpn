@@ -15,25 +15,26 @@ $uninstalled = $false
 
 if ($key.Count -eq 1) {
 
-    $file = "$($key.UninstallString)"
+  $file = "$($key.UninstallString)"
 
-    if ($installerType -eq 'MSI') {
-      # The Product Code GUID is all that should be passed for MSI, and very
-      # FIRST, because it comes directly after /x, which is already set in the
-      # Uninstall-ChocolateyPackage msiargs (facepalm).
-      $silentArgs = "$($key.PSChildName) $silentArgs"
+  if ($installerType -eq 'MSI') {
+    # The Product Code GUID is all that should be passed for MSI, and very
+    # FIRST, because it comes directly after /x, which is already set in the
+    # Uninstall-ChocolateyPackage msiargs (facepalm).
+    $silentArgs = "$($key.PSChildName) $silentArgs"
 
-      # Don't pass anything for file, it is ignored for msi (facepalm number 2)
-      # Alternatively if you need to pass a path to an msi, determine that and
-      # use it instead of the above in silentArgs, still very first.
-      $file = ''
-    }
+    # Don't pass anything for file, it is ignored for msi (facepalm number 2)
+    # Alternatively if you need to pass a path to an msi, determine that and
+    # use it instead of the above in silentArgs, still very first.
+    $file = ''
+  }
 
-    Uninstall-ChocolateyPackage -PackageName $packageName `
-                  -FileType $installerType `
-                  -SilentArgs "$silentArgs" `
-                  -ValidExitCodes $validExitCodes `
-                  -File "$file"
+  Uninstall-ChocolateyPackage `
+    -PackageName $packageName `
+    -FileType $installerType `
+    -SilentArgs "$silentArgs" `
+    -ValidExitCodes $validExitCodes `
+    -File "$file"
 
 } elseif ($key.Count -eq 0) {
   Write-Warning "$packageName has already been uninstalled by other means."
