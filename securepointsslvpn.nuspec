@@ -47,7 +47,6 @@
          If we do not specify one, the chocolatey web validator will
          report a warning to be fixed in order to respect guidelines. -->
       <dependency id="chocolatey" version="0.9.10" />
-      <dependency id="autoit.commandline" version="3.3.14.2" />
     </dependencies>
     <releaseNotes>https://github.com/Securepoint/openvpn-client/releases</releaseNotes>
     <!-- Specific to Chocolatey -->

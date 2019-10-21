@@ -12,32 +12,30 @@ function global:au_SearchReplace {
       "(?i)(checksum32:\s+).*" = "`${1}$($Latest.Checksum32)"
     }
     ".\tools\chocolateyInstall.ps1" = @{
-      "(^[$]package\s*=\s*)""([$]toolsDir\\)(.*"")" = "`$1""`$2$($Latest.FileName32)"""
-      "(^[$]checksum\s*=\s*)('.*')" = "`$1'$($Latest.checksum32)'"
+      "(?i)(^\s*file\s*=\s*`"[$]toolsDir\\).*" = "`${1}$($Latest.FileName32)`""
+      "(?i)(^\s*file64\s*=\s*`"[$]toolsDir\\).*" = "`${1}$($Latest.FileName32)`""
+      "(?i)(^\s*checksum\s*=\s*)('.*')"    = "`$1'$($Latest.Checksum32)'"
+      "(?i)(^\s*checksum64\s*=\s*)('.*')"  = "`$1'$($Latest.Checksum32)'"
     }
   }
 }
 
 function global:au_GetLatest {
 
-  $downloadedPage = Invoke-WebRequest -Uri $releases -UseBasicParsing
+  # Get latest published version
+  $jsonAnswer = (Invoke-WebRequest -Uri "https://api.github.com/repos/Securepoint/openvpn-client/releases/latest" -UseBasicParsing).Content | ConvertFrom-Json
 
-  $url32 = $downloadedPage.links | ? href -match '.exe$' | select -First 1 -expand href
-  # By default packages hosted on github do not have a full path, but only the
-  # path from the root. Cast the URL to a full URL.
-  $baseUrl = $([System.Uri]$releases).Authority
-  $scheme = $([System.Uri]$releases).Scheme
-  if ($url32.Authority -cnotmatch $baseUrl) {
-    $url32 = $scheme + "://" + $baseUrl + $url32
-  }
-  $url32SegmentSize = $([System.Uri]$url32).Segments.Length
-  $filename32 = $([System.Uri]$url32).Segments[$url32SegmentSize - 1]
+  $version = $jsonAnswer.tag_name -Replace '[^0-9.]'
 
-  $version = [regex]::match($url32,'/[A-Za-z-]+-([0-9]+.[0-9]+.[0-9]+).*exe').Groups[1].Value
+  # Select the msi assets. [0] is just in case they are several ones in the future.
+  $msiAsset = $jsonAnswer.assets.where{$_.name -like '*.msi*' }[0]
+
+  $msiUrl = $msiAsset.browser_download_url
+  $msiFilename = $msiAsset.name
 
   return @{
-    url32 = $url32;
-    filename32 = $filename32;
+    url32 = $msiUrl;
+    filename32 = $msiFilename;
     version = $version;
   }
 }
