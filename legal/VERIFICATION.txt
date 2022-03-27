@@ -6,12 +6,12 @@ The installer have been downloaded from the Github release page <https://github.
 and can be verified like this:
 
 1.  Download the following installers:
-    32-Bit: <https://github.com/Securepoint/openvpn-client/releases/download/2.0.22/openvpn-client-installer-2.0.22.exe>
+    32-Bit: <https://github.com/Securepoint/openvpn-client/releases/download/2.0.36/openvpn-client-installer-2.0.36.msi>
 2.  You can use one of the following methods to obtain the checksum
     - Use powershell function 'Get-Filehash'
     - Use chocolatey utility 'checksum.exe'
 
-    checksum type: 
-    checksum32: 
+    checksum type: SHA512
+    checksum32: 3BAD2C2F06D1E449D5F1A6E9F9F097ACE5E032F1F7DA2B996503929F9E3D1CEE343AEFE96CB29AC3F87639A53CC38812CC648429EFC18356731C5250A1D2ACBA
 
 File 'LICENSE.txt' is obtained from <https://github.com/Securepoint/openvpn-client/blob/fa9dc1a802c9feca6a52161eda7117601f48f917/LICENSE.txt>

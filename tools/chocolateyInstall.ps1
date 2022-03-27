@@ -14,10 +14,10 @@ try {
 $packageArgs = @{
   packageName            = 'securepointsslvpn'
   fileType               = 'msi'
-  file                   = "$toolsDir\"
-  file64                 = "$toolsDir\"
-  checksum               = ''
-  checksum64             = ''
+  file                   = "$toolsDir\openvpn-client-installer-2.0.36.msi"
+  file64                 = "$toolsDir\openvpn-client-installer-2.0.36.msi"
+  checksum               = '3BAD2C2F06D1E449D5F1A6E9F9F097ACE5E032F1F7DA2B996503929F9E3D1CEE343AEFE96CB29AC3F87639A53CC38812CC648429EFC18356731C5250A1D2ACBA'
+  checksum64             = '3BAD2C2F06D1E449D5F1A6E9F9F097ACE5E032F1F7DA2B996503929F9E3D1CEE343AEFE96CB29AC3F87639A53CC38812CC648429EFC18356731C5250A1D2ACBA'
   checksumType           = 'sha256'
   checksumType64         = 'sha256'
   silentArgs             = "/qn /norestart /l*v `"$($env:TEMP)\$($packageName).$($env:chocolateyPackageVersion).MsiInstall.log`" TRANSFORMS=`":en-us.mst`""
